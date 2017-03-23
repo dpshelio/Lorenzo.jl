@@ -1,11 +1,11 @@
 # %j is number of days in year
-global time_step = Dict('s' => (Dates.Millisecond, 3), 'S' => (Dates.Second, 2),
-                    'M' => (Dates.Minute, 2), 'H' => (Dates.Hour, 2),
-                    'd' => (Dates.Day, 2), 'j' => (Dates.Day, 3),
-                    'U' => (Dates.Month, 1), 'u' => (Dates.Month, 1), 'm' => (Dates.Month, 2),
-                    'Y' => (Dates.Year, 1), 'y' => (Dates.Year, 2))
-global date_steps = ['s', 'S', 'M', 'H',
-                     'd', 'j', 'U', 'u', 'm', 'Y', 'y']
+time_step = Dict('s' => (Dates.Millisecond, 3), 'S' => (Dates.Second, 2),
+                 'M' => (Dates.Minute, 2), 'H' => (Dates.Hour, 2),
+                 'd' => (Dates.Day, 2), 'j' => (Dates.Day, 3),
+                 'U' => (Dates.Month, 1), 'u' => (Dates.Month, 1), 'm' => (Dates.Month, 2),
+                 'Y' => (Dates.Year, 1), 'y' => (Dates.Year, 2))
+date_steps = ['s', 'S', 'M', 'H',
+              'd', 'j', 'U', 'u', 'm', 'Y', 'y']
 # ^^ Not using keys(time_step) because dict is not ordered. #FIXME change to ordict
 
 function smaller_step{T <: String}(pattern::T)
