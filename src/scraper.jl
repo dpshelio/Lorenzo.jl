@@ -70,18 +70,18 @@ function create_urls{T <: String, DT <: Base.Dates.TimeType}(urlpattern::T, time
         step = smaller_step(dates)
     end
 
+    # Only extract the directory path
     urlpattern_dir = matchall(r".*/", urlpattern)[1]
-
-    urls = Array(String, 0)
-    dt = timeStart:time_step[step][1](1):timeEnd
-    for tt in dt
+    function convert_url(tstep)
         myurl = urlpattern_dir
         for date in dates
             # replace each date bit; day of year implemented manually
-            myurl = replace(myurl, "%$(date)", date == 'j' ? dec(Dates.dayofyear(tt), 3) : Dates.format(tt, "$(date)" ^ time_step[step][2]))
+            myurl = replace(myurl, "%$(date)", date == 'j' ? dec(Dates.dayofyear(tstep), 3) : Dates.format(tstep, "$(date)" ^ time_step[step][2]))
         end
-        push!(urls,   myurl)
+        return myurl
     end
-    return urls
+
+    dt = timeStart:time_step[step][1](1):timeEnd
+    map(convert_url, dt)
 
 end
